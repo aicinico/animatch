@@ -9,10 +9,11 @@
 ## 1. Principes directeurs
 
 1. **Apprendre en profondeur** le développement web, avec des outils directement utiles au métier de QA (même pile technique que l'entreprise : Symfony, API Platform, React, JWT).
-2. **100 % gratuit.**
-3. **Rien d'installé sur le Mac** (ordinateur professionnel) : tout tourne dans un Dev Container, sur GitHub Codespaces.
-4. **Portabilité** : aucune dépendance forte à un hébergeur. On doit pouvoir changer de fournisseur par configuration.
-5. **Simplicité pour le POC**, mais une **conception saine**, pour passer à un pilote réel sans tout refaire.
+2. **Vitrine pour le CV** : le dépôt public doit être soigné (README, historique Git propre, stratégie de tests visible).
+3. **100 % gratuit.**
+4. **Rien d'installé sur le Mac** (ordinateur professionnel) : tout tourne dans un Dev Container, sur GitHub Codespaces.
+5. **Portabilité** : aucune dépendance forte à un hébergeur. On doit pouvoir changer de fournisseur par configuration.
+6. **Simplicité pour le POC**, mais une **conception saine**, pour passer à un pilote réel sans tout refaire.
 
 ## 2. Pile technique
 
@@ -65,6 +66,7 @@ animatch/
 ├── web/                  Interface React + TypeScript (PWA)
 ├── e2e/                  Tests Playwright : parcours dans l'interface et tests d'API
 ├── load/                 Scénarios Artillery
+├── bruno/                Collection Bruno : exploration et documentation de l'API
 ├── docs/                 cadrage.md, architecture.md…
 ├── compose.yaml          Services : PHP, PostgreSQL + PostGIS, Mailpit
 ├── Makefile              Raccourcis pour les commandes courantes
@@ -97,7 +99,7 @@ Le dépôt est **public** : **aucun secret ne doit jamais être commité** (mots
 
 ### 5.4 Méthode de travail avec Claude
 
-Chaque modification suit la règle de `~/.claude/CLAUDE.md` : explication détaillée, avantages et inconvénients, débat, puis application seulement après un feu vert explicite (« applique », « vas-y »).
+Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du dépôt : explication détaillée, avantages et inconvénients, débat, puis application seulement après un feu vert explicite (« applique », « vas-y »). Ce fichier décrit aussi le profil de Nicolas et la façon d'adapter les explications (il part de zéro en développement web).
 
 ## 6. Environnement de développement
 
@@ -293,6 +295,7 @@ Pour éviter que deux informations se contredisent, ces données sont **calculé
 | Fonctionnel (API) | PHPUnit + outils de test d'API Platform, **vraie base PostgreSQL + PostGIS** | Routes de bout en bout côté serveur, **droits d'accès en priorité**, recherche par distance, codes d'erreur |
 | Unitaire (interface) | Vitest + Testing Library | Composants, validation des formulaires, carte de swipe |
 | Bout en bout | Playwright, **Chromium + WebKit + émulation iPhone** | Parcours critiques avec toute la pile, e-mails vérifiés via Mailpit |
+| Exploration manuelle de l'API | Bruno (collection versionnée dans `bruno/`) | Essayer et documenter chaque route. Exécution dans l'intégration continue envisageable plus tard. |
 | Charge | Artillery (lancé à la main, hors intégration continue) | Recherche par distance, envoi de photos |
 
 ### 11.2 Principes
@@ -313,6 +316,12 @@ Pour éviter que deux informations se contredisent, ces données sont **calculé
 4. tests Playwright de bout en bout, avec toute la pile lancée dans Docker.
 
 La fusion dans la branche principale n'est possible que si tout est vert. Des filtres par dossier évitent de tout relancer pour une modification limitée à la documentation.
+
+### 11.4 Vitrine
+
+- **Badges** d'intégration continue dans le `README.md`.
+- **Rapport Playwright publié automatiquement sur GitHub Pages** (gratuit) à chaque fusion sur la branche principale : un recruteur peut consulter les résultats des tests de bout en bout.
+- **Rapports Artillery** commentés dans la documentation.
 
 ## 12. Hébergement
 
@@ -356,3 +365,4 @@ On commence par un **squelette qui marche** (la chaîne complète sur une foncti
 2. **Hébergement du pilote** : à choisir le moment venu (voir §12).
 3. **Service d'envoi d'e-mails** du pilote : Brevo ou Resend.
 4. **Nom de domaine** : il permettrait de passer le jeton de rafraîchissement en cookie `HttpOnly` (environ 10 € par an, donc exclu pour l'instant).
+5. **Hébergement permanent pour la vitrine du CV** : un recruteur voudra un lien de démo toujours accessible, ce que Codespaces ne permet pas. Faut-il avancer l'hébergement gratuit permanent sans attendre un pilote réel ? À discuter vers l'étape 6.

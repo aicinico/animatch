@@ -22,6 +22,7 @@ L'application reprend la mécanique de Tinder :
 
 1. **Apprendre** à développer une application avec Claude.
 2. **Faire une démonstration** à des refuges proches de chez nous, pour recueillir leur intérêt et leurs retours.
+3. **Valoriser le profil de Nicolas sur son CV** : le dépôt GitHub public sert de vitrine (code, stratégie de tests, documentation).
 
 Conséquences :
 
