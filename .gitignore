@@ -1,0 +1,18 @@
+# Secrets et configuration locale (ne jamais commiter)
+.env.local
+.env.*.local
+
+# Dépendances JavaScript (réinstallables avec npm)
+node_modules/
+
+# Rapports de tests Playwright (générés à chaque exécution)
+test-results/
+playwright-report/
+blob-report/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Journaux
+*.log
