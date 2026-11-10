@@ -103,7 +103,8 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 
 ## 6. Environnement de développement
 
-- **Dev Container** décrit dans `.devcontainer/`. Il s'appuie sur Docker et contient PHP, Composer, la Symfony CLI, Node.js, la GitHub CLI, Claude Code et les navigateurs Playwright.
+- **Dev Container** décrit dans `.devcontainer/` : c'est le poste de travail du développeur, sous forme de conteneur. Il contient Docker, Node.js, la GitHub CLI, Claude Code et les navigateurs Playwright (installés automatiquement à la création, une fois `package.json` en place).
+- **PHP n'est pas installé dans le Dev Container** : il tourne dans le conteneur `php` de l'application (FrankenPHP), lancé par Docker Compose depuis le Dev Container. Les commandes PHP passent par `docker compose exec php …`. Ainsi, une seule image PHP sert au développement, à l'intégration continue et à l'hébergement.
 - **Environnement principal : GitHub Codespaces.** Quota gratuit : 120 heures-cœur par mois (environ 60 h sur une machine à 2 cœurs) et 15 Go de stockage. Le plafond de dépense reste à 0 € : pas de facture possible. L'environnement s'arrête automatiquement après 30 minutes d'inactivité.
 - **Solution de secours** : le même Dev Container, lancé en local avec Docker et VS Code.
 - **Éditeur** : VS Code, avec l'extension **Intelephense** pour PHP.

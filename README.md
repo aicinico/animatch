@@ -43,7 +43,23 @@ Le projet avance par étapes, chacune livrée en petites pull requests
 
 ## Installation
 
-À venir avec le Dev Container (étape 0).
+Le projet se développe dans un **Dev Container** (voir `.devcontainer/`) :
+rien d'autre à installer que le navigateur.
+
+**Avec GitHub Codespaces (recommandé)**
+
+1. Sur la page GitHub du dépôt : bouton **Code** → onglet **Codespaces** →
+   **Create codespace on main**.
+2. Attendre la construction de l'environnement (quelques minutes la première
+   fois).
+
+**En local (solution de secours)**
+
+Prérequis : Docker et VS Code avec l'extension Dev Containers. Cloner le
+dépôt, l'ouvrir dans VS Code, puis lancer la commande
+**Dev Containers: Reopen in Container**.
+
+Le lancement de l'application sera documenté avec l'API (étape 0).
 
 ## Méthode de travail
 
