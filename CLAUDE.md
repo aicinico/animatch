@@ -78,7 +78,7 @@ nécessite pas d'accord préalable.
 - [x] Cadrage métier et architecture
 - [ ] Étape 0 — Socle
   - [x] PR 0.1 : `CLAUDE.md`, `docs/`, `README.md`, `.gitignore`
-  - [ ] PR 0.2 : Dev Container
+  - [x] PR 0.2 : Dev Container
   - [ ] PR 0.3 : API (distribution API Platform, PostGIS, Mailpit, route `/health`)
   - [ ] PR 0.4 : Interface (Vite + React + TypeScript)
   - [ ] PR 0.5 : Premiers tests (Playwright, PHPUnit) et collection Bruno
