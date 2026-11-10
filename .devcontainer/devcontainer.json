@@ -1,0 +1,29 @@
+{
+  // Name shown in VS Code and in the Codespaces list
+  "name": "Animatch",
+
+  // Base image: minimal Ubuntu prepared by Microsoft for Dev Containers
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  // Tools added on top of the base image
+  "features": {
+    // Runs Docker inside the Dev Container (needed for compose.yaml)
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    // Node.js + npm, for the React interface, Playwright and Artillery
+    "ghcr.io/devcontainers/features/node:1": { "version": "26" },
+    // GitHub CLI (gh): pull requests from the terminal
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Claude Code
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+
+  // VS Code extensions installed automatically
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client", // PHP: autocompletion, errors
+        "ms-azuretools.vscode-docker" // Visual view of containers
+      ]
+    }
+  }
+}
