@@ -59,7 +59,23 @@ Prérequis : Docker et VS Code avec l'extension Dev Containers. Cloner le
 dépôt, l'ouvrir dans VS Code, puis lancer la commande
 **Dev Containers: Reopen in Container**.
 
-Le lancement de l'application sera documenté avec l'API (étape 0).
+## Lancer l'API
+
+```bash
+cd api
+docker compose up --wait
+```
+
+| Adresse | Contenu |
+|---|---|
+| `https://localhost/api` | Documentation interactive de l'API |
+| `https://localhost/health` | État de l'API et de la base de données |
+| `http://localhost:8025` | Mailpit : e-mails envoyés en développement |
+
+Dans Codespaces, ouvrir ces adresses depuis l'onglet **Ports**. Le port 443
+doit être passé en protocole **HTTPS** (clic droit → Change Port Protocol).
+
+Pour arrêter : `docker compose down`.
 
 ## Méthode de travail
 

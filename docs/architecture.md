@@ -1,6 +1,6 @@
 # Animatch — Architecture technique
 
-> Dernière mise à jour : 8 novembre 2026
+> Dernière mise à jour : 11 novembre 2026
 > Statut : choix techniques du POC, validés
 > Voir aussi : [cadrage.md](cadrage.md) pour le cadrage métier
 
@@ -21,9 +21,9 @@
 |---|---|
 | Forme de l'application | **Application web responsive et installable (PWA)**, pour mobile et ordinateur. Pas de publication sur les stores pour le POC. |
 | Interface | **React + TypeScript**, construite avec **Vite** |
-| API | **Symfony** (dernière version LTS, à vérifier à l'installation) + **API Platform** (version compatible), en PHP |
+| API | **Symfony 7.4** (LTS) + **API Platform 5.0**, en **PHP 8.5** |
 | Serveur PHP | **FrankenPHP** (fourni par la distribution API Platform), HTTPS local automatique |
-| Base de données | **PostgreSQL + PostGIS** (recherche par distance) |
+| Base de données | **PostgreSQL 17 + PostGIS 3.7** (recherche par distance) |
 | E-mails en développement | **Mailpit** (intercepte tous les e-mails, aucun envoi réel) |
 | Tests | **PHPUnit** (API), **Vitest + Testing Library** (interface), **Playwright** (bout en bout et API), **Artillery** (charge) |
 | Intégration continue | **GitHub Actions** (gratuit et illimité pour un dépôt public) |
@@ -62,13 +62,12 @@
 animatch/
 ├── .devcontainer/        Configuration du Dev Container (Codespaces / local)
 ├── .github/workflows/    Intégration continue (GitHub Actions)
-├── api/                  API Symfony + API Platform (PHP)
+├── api/                  API Symfony + API Platform (PHP), avec son Dockerfile et ses fichiers compose
 ├── web/                  Interface React + TypeScript (PWA)
 ├── e2e/                  Tests Playwright : parcours dans l'interface et tests d'API
 ├── load/                 Scénarios Artillery
 ├── bruno/                Collection Bruno : exploration et documentation de l'API
 ├── docs/                 cadrage.md, architecture.md…
-├── compose.yaml          Services : PHP, PostgreSQL + PostGIS, Mailpit
 ├── Makefile              Raccourcis pour les commandes courantes
 ├── CLAUDE.md             Instructions de projet pour Claude
 └── README.md             Installation et lancement
@@ -108,7 +107,8 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 - **Environnement principal : GitHub Codespaces.** Quota gratuit : 120 heures-cœur par mois (environ 60 h sur une machine à 2 cœurs) et 15 Go de stockage. Le plafond de dépense reste à 0 € : pas de facture possible. L'environnement s'arrête automatiquement après 30 minutes d'inactivité.
 - **Solution de secours** : le même Dev Container, lancé en local avec Docker et VS Code.
 - **Éditeur** : VS Code, avec l'extension **Intelephense** pour PHP.
-- **Base de départ** : la **distribution officielle d'API Platform**, qui fournit déjà l'environnement Docker (FrankenPHP, PostgreSQL, HTTPS). On y ajoute PostGIS et Mailpit, et on remplace l'interface Next.js par Vite + React.
+- **Base de départ** : **[symfony-docker](https://github.com/dunglas/symfony-docker)**, le socle Docker officiel sur lequel s'appuie aussi API Platform (FrankenPHP, HTTPS). Au premier démarrage, le conteneur `php` crée lui-même le projet Symfony ; API Platform est ensuite ajouté avec `composer require api`. L'installateur d'API Platform a été écarté, car il exige PHP et Composer dans le Dev Container.
+- **Services Docker** (`api/compose.yaml`) : `php`, `database` (PostgreSQL + PostGIS) et, en développement uniquement (`api/compose.override.yaml`), `mailer` (Mailpit).
 - **Tests sur iPhone** : via les adresses HTTPS publiques que Codespaces attribue à chaque port.
 
 ## 7. Authentification
@@ -362,8 +362,9 @@ On commence par un **squelette qui marche** (la chaîne complète sur une foncti
 
 ## 14. Questions ouvertes techniques
 
-1. **Versions exactes** de Symfony (LTS), API Platform et PHP : à fixer à l'étape 0.
+1. ~~**Versions exactes** de Symfony (LTS), API Platform et PHP~~ : résolu à la PR 0.3 (Symfony 7.4 LTS, API Platform 5.0, PHP 8.5, PostgreSQL 17 + PostGIS 3.7).
 2. **Hébergement du pilote** : à choisir le moment venu (voir §12).
 3. **Service d'envoi d'e-mails** du pilote : Brevo ou Resend.
 4. **Nom de domaine** : il permettrait de passer le jeton de rafraîchissement en cookie `HttpOnly` (environ 10 € par an, donc exclu pour l'instant).
 5. **Hébergement permanent pour la vitrine du CV** : un recruteur voudra un lien de démo toujours accessible, ce que Codespaces ne permet pas. Faut-il avancer l'hébergement gratuit permanent sans attendre un pilote réel ? À discuter vers l'étape 6.
+6. **`compose.yaml` à la racine** : les fichiers compose sont dans `api/`, à côté du `Dockerfile`. Faut-il un `compose.yaml` racine qui les reprend (`include`), quand l'interface et les tests auront aussi besoin de la pile ? À décider aux PR 0.4 ou 0.5.
