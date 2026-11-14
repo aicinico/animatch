@@ -77,6 +77,20 @@ doit être passé en protocole **HTTPS** (clic droit → Change Port Protocol).
 
 Pour arrêter : `docker compose down`.
 
+## Lancer l'interface
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+L'interface est disponible sur `http://localhost:5173`. Dans Codespaces,
+l'ouvrir depuis l'onglet **Ports**. La page se met à jour automatiquement à
+chaque modification du code.
+
+Pour arrêter : `Ctrl+C` dans le terminal.
+
 ## Méthode de travail
 
 Ce projet est développé avec l'assistance de
