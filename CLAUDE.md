@@ -82,7 +82,7 @@ nécessite pas d'accord préalable.
   - [x] PR 0.3 : API (symfony-docker, API Platform, PostGIS, Mailpit, route `/health`)
   - [x] PR 0.4 : Interface (Vite + React + TypeScript)
   - [x] PR 0.5a : PHPUnit (test fonctionnel de `/health`)
-  - [ ] PR 0.5b : Collection Bruno
+  - [x] PR 0.5b : Collection Bruno
   - [ ] PR 0.5c : Playwright (tests d'API et de l'interface)
   - [ ] PR 0.6 : Intégration continue (GitHub Actions)
 - [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
