@@ -93,6 +93,17 @@ Puis lancer les tests :
 docker compose exec php bin/phpunit
 ```
 
+## Explorer l'API avec Bruno
+
+La collection [Bruno](https://www.usebruno.com/) est dans `bruno/`, au format
+YAML. L'extension Bruno de VS Code est installée avec le Dev Container.
+
+1. Démarrer l'API (voir ci-dessus).
+2. Dans VS Code, ouvrir l'extension Bruno, puis **+** → ouvrir une collection
+   → dossier `bruno/`.
+3. Sélectionner l'environnement **local**.
+4. Lancer une requête, par exemple **Health**.
+
 ## Lancer l'interface
 
 ```bash
