@@ -77,6 +77,22 @@ doit être passé en protocole **HTTPS** (clic droit → Change Port Protocol).
 
 Pour arrêter : `docker compose down`.
 
+## Lancer les tests de l'API
+
+L'API doit être démarrée (voir ci-dessus). La première fois, créer la base
+de données de test :
+
+```bash
+cd api
+docker compose exec php bin/console doctrine:database:create --env=test
+```
+
+Puis lancer les tests :
+
+```bash
+docker compose exec php bin/phpunit
+```
+
 ## Lancer l'interface
 
 ```bash
