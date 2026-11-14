@@ -80,7 +80,7 @@ nécessite pas d'accord préalable.
   - [x] PR 0.1 : `CLAUDE.md`, `docs/`, `README.md`, `.gitignore`
   - [x] PR 0.2 : Dev Container
   - [x] PR 0.3 : API (symfony-docker, API Platform, PostGIS, Mailpit, route `/health`)
-  - [ ] PR 0.4 : Interface (Vite + React + TypeScript)
+  - [x] PR 0.4 : Interface (Vite + React + TypeScript)
   - [ ] PR 0.5 : Premiers tests (Playwright, PHPUnit) et collection Bruno
   - [ ] PR 0.6 : Intégration continue (GitHub Actions)
 - [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
