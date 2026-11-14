@@ -22,7 +22,8 @@
     "vscode": {
       "extensions": [
         "bmewburn.vscode-intelephense-client", // PHP: autocompletion, errors
-        "ms-azuretools.vscode-docker" // Visual view of containers
+        "ms-azuretools.vscode-docker", // Visual view of containers
+        "bruno-api-client.bruno" // Bruno: API requests from the bruno/ collection
       ]
     }
   }
