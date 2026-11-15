@@ -85,6 +85,21 @@ nécessite pas d'accord préalable.
   - [x] PR 0.5b : Collection Bruno
   - [x] PR 0.5c : Playwright (tests d'API et de l'interface)
   - [x] PR 0.6 : Intégration continue (GitHub Actions)
-- [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
+- [ ] Étape 1 — Comptes
+  - [ ] PR 1.1 : inscription et connexion (branche `feat/registration-login`)
+    - [x] Entité `User` (rôle unique via l'enum `UserRole`) et sa migration
+    - [x] Inscription adoptant : `POST /api/register/adopter` (rôle imposé
+      par le serveur, l'inscription des refuges vient à l'étape 2)
+    - [ ] Connexion JWT (LexikJWTAuthenticationBundle) — prochaine étape :
+      commencer par expliquer le fonctionnement d'un JWT, puis
+      l'installation, les clés, la configuration et la CI
+    - [ ] Écrans React d'inscription et de connexion (Tailwind, shadcn/ui)
+    - [ ] Tests PHPUnit, Bruno et Playwright (dont : mot de passe haché en
+      base, rôle envoyé par le client ignoré)
+  - [ ] PR 1.2 : jeton de rafraîchissement avec rotation
+  - [ ] PR 1.3 : rôles et règles d'accès
+  - [ ] PR 1.4 : vérification de l'e-mail
+  - [ ] PR 1.5 : mot de passe oublié
+- [ ] Étapes 2 à 10 : voir `docs/architecture.md` §13
 
 Tenir cette section à jour à la fin de chaque pull request.
