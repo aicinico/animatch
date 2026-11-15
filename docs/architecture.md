@@ -367,4 +367,4 @@ On commence par un **squelette qui marche** (la chaîne complète sur une foncti
 3. **Service d'envoi d'e-mails** du pilote : Brevo ou Resend.
 4. **Nom de domaine** : il permettrait de passer le jeton de rafraîchissement en cookie `HttpOnly` (environ 10 € par an, donc exclu pour l'instant).
 5. **Hébergement permanent pour la vitrine du CV** : un recruteur voudra un lien de démo toujours accessible, ce que Codespaces ne permet pas. Faut-il avancer l'hébergement gratuit permanent sans attendre un pilote réel ? À discuter vers l'étape 6.
-6. **`compose.yaml` à la racine** : les fichiers compose sont dans `api/`, à côté du `Dockerfile`. Faut-il un `compose.yaml` racine qui les reprend (`include`), quand l'interface et les tests auront aussi besoin de la pile ? À décider aux PR 0.4 ou 0.5.
+6. **`compose.yaml` à la racine** : les fichiers compose sont dans `api/`, à côté du `Dockerfile`. Faut-il un `compose.yaml` racine qui les reprend (`include`), quand l'interface et les tests auront aussi besoin de la pile ? Pas nécessaire à la PR 0.5c (l'interface est démarrée par Playwright, l'API à la main) : à revoir à la PR 0.6, pour l'intégration continue.
