@@ -3,12 +3,18 @@ import { defineConfig, devices } from '@playwright/test';
 const API_URL = 'https://localhost';
 const WEB_URL = 'http://localhost:5173';
 
+// GitHub Actions sets CI: there, test the production build of the interface
+const isCI = !!process.env.CI;
+
 export default defineConfig({
+  reporter: [['list'], ['html', { open: 'never' }]],
   webServer: {
-    command: 'npm run dev',
+    command: isCI
+      ? 'npm run build && npm run preview -- --port 5173 --strictPort'
+      : 'npm run dev',
     cwd: '../web',
     url: WEB_URL,
-    reuseExistingServer: true,
+    reuseExistingServer: !isCI,
   },
   projects: [
     {

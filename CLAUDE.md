@@ -76,7 +76,7 @@ nécessite pas d'accord préalable.
 ## Avancement
 
 - [x] Cadrage métier et architecture
-- [ ] Étape 0 — Socle
+- [x] Étape 0 — Socle
   - [x] PR 0.1 : `CLAUDE.md`, `docs/`, `README.md`, `.gitignore`
   - [x] PR 0.2 : Dev Container
   - [x] PR 0.3 : API (symfony-docker, API Platform, PostGIS, Mailpit, route `/health`)
@@ -84,7 +84,7 @@ nécessite pas d'accord préalable.
   - [x] PR 0.5a : PHPUnit (test fonctionnel de `/health`)
   - [x] PR 0.5b : Collection Bruno
   - [x] PR 0.5c : Playwright (tests d'API et de l'interface)
-  - [ ] PR 0.6 : Intégration continue (GitHub Actions)
+  - [x] PR 0.6 : Intégration continue (GitHub Actions)
 - [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
 
 Tenir cette section à jour à la fin de chaque pull request.

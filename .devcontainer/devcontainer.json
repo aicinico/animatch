@@ -26,8 +26,16 @@
       "extensions": [
         "bmewburn.vscode-intelephense-client", // PHP: autocompletion, errors
         "ms-azuretools.vscode-docker", // Visual view of containers
-        "bruno-api-client.bruno" // Bruno: API requests from the bruno/ collection
-      ]
+        "bruno-api-client.bruno", // Bruno: API requests from the bruno/ collection
+        "esbenp.prettier-vscode" // Prettier: formats TypeScript files on save
+      ],
+      "settings": {
+        // Prettier formats these languages on save
+        "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+        "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+        "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+        "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true }
+      }
     }
   }
 }
