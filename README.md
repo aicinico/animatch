@@ -1,5 +1,8 @@
 # Animatch
 
+[![CI](https://github.com/aicinico/animatch/actions/workflows/ci.yml/badge.svg)](https://github.com/aicinico/animatch/actions/workflows/ci.yml)
+· [Rapport des tests de bout en bout](https://aicinico.github.io/animatch/)
+
 > Nom provisoire · Projet d'apprentissage · **En cours de développement**
 
 Animatch est une application « à la Tinder » pour l'adoption de chats et de
@@ -24,6 +27,7 @@ une rencontre.
 | API | Symfony, API Platform (PHP), FrankenPHP |
 | Base de données | PostgreSQL + PostGIS |
 | Tests | PHPUnit, Vitest, Playwright, Bruno, Artillery |
+| Qualité | PHPStan, PHP-CS-Fixer, ESLint, Prettier |
 | Environnement | Dev Container, GitHub Codespaces, GitHub Actions |
 
 ## Documentation
@@ -38,7 +42,7 @@ une rencontre.
 Le projet avance par étapes, chacune livrée en petites pull requests
 (voir [le découpage](docs/architecture.md#13-découpage-en-étapes)).
 
-- [ ] Étape 0 — Socle (en cours)
+- [x] Étape 0 — Socle
 - [ ] Étapes 1 à 10 — Fonctionnalités
 
 ## Installation
@@ -62,8 +66,7 @@ dépôt, l'ouvrir dans VS Code, puis lancer la commande
 ## Lancer l'API
 
 ```bash
-cd api
-docker compose up --wait
+make start-api
 ```
 
 | Adresse | Contenu |
@@ -75,23 +78,27 @@ docker compose up --wait
 Dans Codespaces, ouvrir ces adresses depuis l'onglet **Ports**. Le port 443
 doit être passé en protocole **HTTPS** (clic droit → Change Port Protocol).
 
-Pour arrêter : `docker compose down`.
+Pour arrêter : `make stop-api`.
 
-## Lancer les tests de l'API
+## Lancer les tests
 
-L'API doit être démarrée (voir ci-dessus). La première fois, créer la base
-de données de test :
-
-```bash
-cd api
-docker compose exec php bin/console doctrine:database:create --env=test
-```
-
-Puis lancer les tests :
+Une seule commande démarre l'API si besoin, puis lance tous les tests :
 
 ```bash
-docker compose exec php bin/phpunit
+make test-all
 ```
+
+| Commande | Effet |
+|---|---|
+| `make test-all` | Tous les tests : API, puis bout en bout |
+| `make test-api` | Tests de l'API (PHPUnit) |
+| `make test-e2e` | Tests de bout en bout (Playwright : API, Chrome, Safari, iPhone) |
+
+L'interface est démarrée automatiquement par Playwright. Si elle tourne déjà
+(`npm run dev` dans `web/`), Playwright l'utilise.
+
+Les résultats de la dernière version sont aussi publiés dans le
+[rapport Playwright](https://aicinico.github.io/animatch/).
 
 ## Explorer l'API avec Bruno
 
@@ -104,23 +111,10 @@ YAML. L'extension Bruno de VS Code est installée avec le Dev Container.
 3. Sélectionner l'environnement **local**.
 4. Lancer une requête, par exemple **Health**.
 
-## Lancer les tests de bout en bout
-
-Les tests [Playwright](https://playwright.dev/) sont dans `e2e/`. Les
-dépendances et les navigateurs sont installés à la création du Dev Container.
-L'API doit être démarrée ; l'interface est démarrée automatiquement par
-Playwright.
-
-```bash
-cd e2e
-npm test
-```
-
 ## Lancer l'interface
 
 ```bash
 cd web
-npm install
 npm run dev
 ```
 
@@ -129,6 +123,17 @@ l'ouvrir depuis l'onglet **Ports**. La page se met à jour automatiquement à
 chaque modification du code.
 
 Pour arrêter : `Ctrl+C` dans le terminal.
+
+## Qualité du code
+
+Chaque pull request est vérifiée par l'intégration continue (GitHub Actions) :
+mise en forme, analyse statique et tests. Elle ne peut être fusionnée que si
+tout est vert.
+
+| Code | Mise en forme | Analyse statique |
+|---|---|---|
+| TypeScript (`web/`, `e2e/`) | `npm run format`, automatique à l'enregistrement dans VS Code | ESLint, compilation TypeScript |
+| PHP (`api/`) | `docker compose exec php vendor/bin/php-cs-fixer fix` | `docker compose exec php vendor/bin/phpstan analyse` |
 
 ## Méthode de travail
 
