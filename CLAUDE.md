@@ -83,7 +83,7 @@ nécessite pas d'accord préalable.
   - [x] PR 0.4 : Interface (Vite + React + TypeScript)
   - [x] PR 0.5a : PHPUnit (test fonctionnel de `/health`)
   - [x] PR 0.5b : Collection Bruno
-  - [ ] PR 0.5c : Playwright (tests d'API et de l'interface)
+  - [x] PR 0.5c : Playwright (tests d'API et de l'interface)
   - [ ] PR 0.6 : Intégration continue (GitHub Actions)
 - [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
 

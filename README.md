@@ -104,6 +104,18 @@ YAML. L'extension Bruno de VS Code est installée avec le Dev Container.
 3. Sélectionner l'environnement **local**.
 4. Lancer une requête, par exemple **Health**.
 
+## Lancer les tests de bout en bout
+
+Les tests [Playwright](https://playwright.dev/) sont dans `e2e/`. Les
+dépendances et les navigateurs sont installés à la création du Dev Container.
+L'API doit être démarrée ; l'interface est démarrée automatiquement par
+Playwright.
+
+```bash
+cd e2e
+npm test
+```
+
 ## Lancer l'interface
 
 ```bash
