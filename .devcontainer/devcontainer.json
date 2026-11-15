@@ -5,6 +5,9 @@
   // Base image: minimal Ubuntu prepared by Microsoft for Dev Containers
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
 
+  // Runs once after the container is created
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
   // Tools added on top of the base image
   "features": {
     // Runs Docker inside the Dev Container (needed for compose.yaml)
