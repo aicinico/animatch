@@ -54,10 +54,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        // "Nico@Mail.fr " and "nico@mail.fr" must be the same account
-        $this->email = mb_strtolower(trim($email));
+        $this->email = self::normalizeEmail($email);
 
         return $this;
+    }
+
+    // "Nico@Mail.fr " and "nico@mail.fr" must be the same account
+    public static function normalizeEmail(string $email): string
+    {
+        return mb_strtolower(trim($email));
     }
 
     public function getPassword(): string
