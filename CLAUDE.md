@@ -90,12 +90,15 @@ nécessite pas d'accord préalable.
     - [x] Entité `User` (rôle unique via l'enum `UserRole`) et sa migration
     - [x] Inscription adoptant : `POST /api/register/adopter` (rôle imposé
       par le serveur, l'inscription des refuges vient à l'étape 2)
-    - [ ] Connexion JWT (LexikJWTAuthenticationBundle) — prochaine étape :
-      commencer par expliquer le fonctionnement d'un JWT, puis
-      l'installation, les clés, la configuration et la CI
+    - [x] Connexion JWT : `POST /api/login`, jeton de 15 minutes, clés
+      générées au démarrage du conteneur (hors production), e-mail
+      normalisé comme à l'inscription
     - [ ] Écrans React d'inscription et de connexion (Tailwind, shadcn/ui)
+      — prochaine étape
     - [ ] Tests PHPUnit, Bruno et Playwright (dont : mot de passe haché en
-      base, rôle envoyé par le client ignoré)
+      base, rôle envoyé par le client ignoré, connexion insensible aux
+      majuscules, même message d'erreur pour un e-mail inconnu et un
+      mauvais mot de passe)
   - [ ] PR 1.2 : jeton de rafraîchissement avec rotation
   - [ ] PR 1.3 : rôles et règles d'accès
   - [ ] PR 1.4 : vérification de l'e-mail
