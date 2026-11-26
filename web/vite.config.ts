@@ -9,4 +9,14 @@ export default defineConfig({
   resolve: {
     alias: { '@': path.resolve(import.meta.dirname, './src') },
   },
+  server: {
+    proxy: {
+      // Forwards API calls to the Symfony API (Caddy)
+      '/api': {
+        target: 'https://localhost',
+        changeOrigin: true,
+        secure: false, // accepts Caddy's self-signed development certificate
+      },
+    },
+  },
 });
