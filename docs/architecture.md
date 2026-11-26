@@ -140,7 +140,7 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 | Navigation entre pages | **React Router** |
 | Appels à l'API, cache, états de chargement | **TanStack Query** |
 | Client d'API typé | **openapi-typescript + openapi-fetch** (types générés depuis la description OpenAPI d'API Platform) |
-| Formulaires et validation | **React Hook Form + Zod** |
+| Formulaires et validation | **React Hook Form** (validation côté serveur uniquement : l'interface affiche les erreurs renvoyées par l'API) |
 | Style | **Tailwind CSS** |
 | Composants (accessibles) | **shadcn/ui** (code des composants copié dans le projet) |
 | Animation du swipe | **Motion** |
@@ -294,7 +294,7 @@ Pour éviter que deux informations se contredisent, ces données sont **calculé
 | Analyse statique | PHPStan, ESLint, compilation TypeScript | Erreurs de type, code douteux |
 | Unitaire (API) | PHPUnit | Logique métier pure : critères de tri, transitions de statut, indice de complétude, règle de réapparition |
 | Fonctionnel (API) | PHPUnit + outils de test d'API Platform, **vraie base PostgreSQL + PostGIS** | Routes de bout en bout côté serveur, **droits d'accès en priorité**, recherche par distance, codes d'erreur |
-| Unitaire (interface) | Vitest + Testing Library | Composants, validation des formulaires, carte de swipe |
+| Unitaire (interface) | Vitest + Testing Library | Composants, affichage des erreurs des formulaires, carte de swipe |
 | Bout en bout | Playwright, **Chromium + WebKit + émulation iPhone** | Parcours critiques avec toute la pile, e-mails vérifiés via Mailpit |
 | Exploration manuelle de l'API | Bruno (collection versionnée dans `bruno/`) | Essayer et documenter chaque route. Exécution dans l'intégration continue envisageable plus tard. |
 | Charge | Artillery (lancé à la main, hors intégration continue) | Recherche par distance, envoi de photos |
