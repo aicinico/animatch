@@ -1,6 +1,6 @@
 function App() {
   return (
-    <main>
+    <main className="p-4">
       <h1>Animatch</h1>
       <p>Adoptez un chat ou un chien près de chez vous.</p>
     </main>
