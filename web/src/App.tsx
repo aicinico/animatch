@@ -1,9 +1,15 @@
+import { Route, Routes } from 'react-router';
+import HomePage from '@/pages/HomePage';
+import LoginPage from '@/pages/LoginPage';
+import RegisterPage from '@/pages/RegisterPage';
+
 function App() {
   return (
-    <main className="p-4">
-      <h1>Animatch</h1>
-      <p>Adoptez un chat ou un chien près de chez vous.</p>
-    </main>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/inscription" element={<RegisterPage />} />
+      <Route path="/connexion" element={<LoginPage />} />
+    </Routes>
   );
 }
 
