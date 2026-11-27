@@ -90,7 +90,7 @@ nécessite pas d'accord préalable.
   - [x] PR 0.5c : Playwright (tests d'API et de l'interface)
   - [x] PR 0.6 : Intégration continue (GitHub Actions)
 - [ ] Étape 1 — Comptes
-  - [ ] PR 1.1 : inscription et connexion (branche `feat/registration-login`)
+  - [x] PR 1.1 : inscription et connexion (#10)
     - [x] Entité `User` (rôle unique via l'enum `UserRole`) et sa migration
     - [x] Inscription adoptant : `POST /api/register/adopter` (rôle imposé
       par le serveur, l'inscription des refuges vient à l'étape 2)
