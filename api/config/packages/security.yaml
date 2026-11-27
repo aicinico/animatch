@@ -41,8 +41,16 @@ security:
             refresh_jwt:
                 check_path: /api/token/refresh
 
-    # Access rules come in PR 1.3
-    access_control: []
+    # Read from top to bottom: the first matching line wins
+    access_control:
+        # Open to everyone
+        - { path: '^/health$', roles: PUBLIC_ACCESS }
+        - { path: '^/api/(login|token/refresh|register/adopter)$', roles: PUBLIC_ACCESS }
+        # API documentation (Swagger) and the descriptions it links to
+        - { path: '^/api/?$', roles: PUBLIC_ACCESS }
+        - { path: '^/api/(docs|contexts|errors|validation_errors|\.well-known)(/|\.|$)', roles: PUBLIC_ACCESS }
+        # Everything else is closed by default: a valid JWT is required
+        - { path: '^/', roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
