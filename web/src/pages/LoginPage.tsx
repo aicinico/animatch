@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { setAccessToken } from '@/lib/auth';
+import { saveTokens } from '@/lib/auth';
 
 type LoginFormValues = {
   email: string;
@@ -27,8 +27,7 @@ function LoginPage() {
     });
 
     if (response.ok) {
-      const body: { token: string } = await response.json();
-      setAccessToken(body.token);
+      saveTokens(await response.json());
       navigate('/');
       return;
     }
