@@ -138,9 +138,8 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 |---|---|
 | Build et serveur de développement | **Vite** |
 | Navigation entre pages | **React Router** |
-| Appels à l'API, cache, états de chargement | **TanStack Query** |
-| Client d'API typé | **openapi-typescript + openapi-fetch** (types générés depuis la description OpenAPI d'API Platform) |
-| Formulaires et validation | **React Hook Form + Zod** |
+| Appels à l'API | **`fetch`**, la fonction intégrée au navigateur (décision du 27/11/2026, plus simple pour débuter). TanStack Query et openapi-fetch, prévus au départ, seront reconsidérés si les besoins grandissent (cache, nombreux écrans). |
+| Formulaires et validation | **React Hook Form** (validation côté serveur uniquement : l'interface affiche les erreurs renvoyées par l'API) |
 | Style | **Tailwind CSS** |
 | Composants (accessibles) | **shadcn/ui** (code des composants copié dans le projet) |
 | Animation du swipe | **Motion** |
@@ -148,7 +147,9 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 | Tests unitaires | **Vitest + Testing Library** |
 | Qualité | **ESLint + Prettier** |
 
-**Les types partagés** : les types TypeScript de l'API sont générés automatiquement. Si l'API change, la compilation de l'interface et des tests Playwright signale immédiatement ce qui casse.
+**Les types de l'API** : pour l'instant, ils sont écrits à la main dans
+chaque page. Les générer automatiquement depuis l'API (openapi-typescript)
+reste possible plus tard.
 
 ## 9. API (api/)
 
@@ -294,7 +295,7 @@ Pour éviter que deux informations se contredisent, ces données sont **calculé
 | Analyse statique | PHPStan, ESLint, compilation TypeScript | Erreurs de type, code douteux |
 | Unitaire (API) | PHPUnit | Logique métier pure : critères de tri, transitions de statut, indice de complétude, règle de réapparition |
 | Fonctionnel (API) | PHPUnit + outils de test d'API Platform, **vraie base PostgreSQL + PostGIS** | Routes de bout en bout côté serveur, **droits d'accès en priorité**, recherche par distance, codes d'erreur |
-| Unitaire (interface) | Vitest + Testing Library | Composants, validation des formulaires, carte de swipe |
+| Unitaire (interface) | Vitest + Testing Library | Composants, affichage des erreurs des formulaires, carte de swipe |
 | Bout en bout | Playwright, **Chromium + WebKit + émulation iPhone** | Parcours critiques avec toute la pile, e-mails vérifiés via Mailpit |
 | Exploration manuelle de l'API | Bruno (collection versionnée dans `bruno/`) | Essayer et documenter chaque route. Exécution dans l'intégration continue envisageable plus tard. |
 | Charge | Artillery (lancé à la main, hors intégration continue) | Recherche par distance, envoi de photos |
@@ -302,7 +303,10 @@ Pour éviter que deux informations se contredisent, ces données sont **calculé
 ### 11.2 Principes
 
 - **On cible les zones critiques**, sans seuil de couverture global : règles métier, droits d'accès, cycle de vie.
-- **Pas de TDD** : les tests sont écrits avec le code, pas avant.
+- **Pas de TDD** : les tests sont écrits après le code, pas avant.
+- **Tests reportés** (décision du 27/11/2026) : pendant les étapes 1 à 4, on
+  n'écrit pas de nouveaux tests, pour avancer sur l'appli. On les rattrape à
+  l'étape 4 bis.
 - **Claude écrit les tests**, y compris ceux de bout en bout. Nicolas en écrit quand il le souhaite, avec l'aide de Claude.
 - **Conventions Playwright** (celles de Nicolas) : **Page Object Model**, **fixtures personnalisées**, **organisation par fonctionnalité**.
 - **Isolation des tests d'API** : chaque test s'exécute dans une transaction annulée à la fin (DAMA DoctrineTestBundle).
@@ -349,6 +353,7 @@ On commence par un **squelette qui marche** (la chaîne complète sur une foncti
 | **2** | Refuges et admin | Inscription d'un refuge, géocodage, espace admin (validation, refus avec motif) |
 | **3** | Fiches animaux | Création et modification, photos (envoi et redimensionnement), critères de tri. Premières données de démonstration. |
 | **4** | Profil adoptant | Champs, indice de complétude, localisation GPS ou adresse, rayon |
+| **4 bis** | Tests de rattrapage | Tests des étapes 1 à 4, à partir de la liste « À tester plus tard » de `CLAUDE.md` : PHPUnit, Bruno, Playwright, en priorité les droits d'accès et les règles métier. On décide ensuite si les tests reprennent au fil de l'eau. |
 | **5** | Découverte et swipe | Recherche par distance, pile de cartes, swipe animé, règle de réapparition |
 | **6** | Candidatures et match | Critères automatiques, acceptation automatique, grille côté refuge, « Mes likes », retrait d'un like |
 | **7** | Messagerie | Conversations, messages texte et photo, lecture seule déduite, rétractation, badge non lu |

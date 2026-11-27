@@ -32,6 +32,7 @@ jobs:
         working-directory: api
     steps:
       - uses: actions/checkout@v7
+      # Also creates the JWT keys (see api/frankenphp/docker-entrypoint.sh)
       - name: Start the API
         run: docker compose up --build --wait
       - name: Check coding style
@@ -55,6 +56,7 @@ jobs:
           cache-dependency-path: |
             web/package-lock.json
             e2e/package-lock.json
+      # Also creates the JWT keys (see api/frankenphp/docker-entrypoint.sh)
       - name: Start the API
         working-directory: api
         run: docker compose up --build --wait

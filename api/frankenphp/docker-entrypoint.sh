@@ -38,6 +38,11 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		fi
 	fi
 
+	# JWT keys are not in Git: create them on first start (never in production)
+	if [ "$APP_ENV" != 'prod' ]; then
+		php bin/console lexik:jwt:generate-keypair --skip-if-exists
+	fi
+
 	echo 'PHP app ready!'
 fi
 

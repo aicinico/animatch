@@ -69,9 +69,13 @@ nécessite pas d'accord préalable.
 - Code en anglais ; interface, documentation et pull requests en français.
 - Une branche et une pull request par fonctionnalité ; Conventional Commits.
 - Dépôt public : **ne jamais commiter de secret** (utiliser `.env.local`).
-- Tests : Claude écrit les tests (unitaires, fonctionnels, bout en bout) avec
-  le code ; pas de TDD ; on cible les zones critiques (règles métier, droits
-  d'accès, cycle de vie) plutôt qu'un pourcentage de couverture.
+- Tests : **reportés** (décision du 27/11/2026) — on construit d'abord
+  l'appli ; on en reparle à la fin de l'étape 4 (ou 5). D'ici là, on
+  n'écrit pas de nouveaux tests ; ceux qui existent
+  restent en place et tournent en CI. À chaque PR, ajouter ses points
+  critiques à la liste « À tester plus tard ». Au moment de s'y mettre : pas
+  de TDD ; on cible les zones critiques (règles métier, droits d'accès, cycle
+  de vie) plutôt qu'un pourcentage de couverture.
 
 ## Avancement
 
@@ -85,6 +89,29 @@ nécessite pas d'accord préalable.
   - [x] PR 0.5b : Collection Bruno
   - [x] PR 0.5c : Playwright (tests d'API et de l'interface)
   - [x] PR 0.6 : Intégration continue (GitHub Actions)
-- [ ] Étapes 1 à 10 : voir `docs/architecture.md` §13
+- [ ] Étape 1 — Comptes
+  - [x] PR 1.1 : inscription et connexion (#10)
+    - [x] Entité `User` (rôle unique via l'enum `UserRole`) et sa migration
+    - [x] Inscription adoptant : `POST /api/register/adopter` (rôle imposé
+      par le serveur, l'inscription des refuges vient à l'étape 2)
+    - [x] Connexion JWT : `POST /api/login`, jeton de 15 minutes, clés
+      générées au démarrage du conteneur (hors production), e-mail
+      normalisé comme à l'inscription
+    - [x] Écrans React d'inscription et de connexion (Tailwind, shadcn/ui,
+      React Router, React Hook Form) ; appels à l'API avec `fetch` (et non
+      openapi-fetch + TanStack Query comme prévu dans l'architecture) ;
+      jeton gardé en mémoire
+    - Reporté : traduction en français des messages d'erreur de l'API
+  - [ ] PR 1.2 : jeton de rafraîchissement avec rotation
+  - [ ] PR 1.3 : rôles et règles d'accès
+  - [ ] PR 1.4 : vérification de l'e-mail
+  - [ ] PR 1.5 : mot de passe oublié
+- [ ] Étapes 2 à 10 : voir `docs/architecture.md` §13
 
 Tenir cette section à jour à la fin de chaque pull request.
+
+## À tester plus tard
+
+- PR 1.1 : mot de passe haché en base, rôle envoyé par le client ignoré,
+  connexion insensible aux majuscules, même message d'erreur pour un e-mail
+  inconnu et un mauvais mot de passe, écrans d'inscription et de connexion
