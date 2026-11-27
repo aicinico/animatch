@@ -69,9 +69,9 @@ nécessite pas d'accord préalable.
 - Code en anglais ; interface, documentation et pull requests en français.
 - Une branche et une pull request par fonctionnalité ; Conventional Commits.
 - Dépôt public : **ne jamais commiter de secret** (utiliser `.env.local`).
-- Tests : **reportés à la fin du projet** (décision du 27/11/2026) — on
-  construit d'abord l'appli, les tests viendront dans une étape dédiée vers
-  la fin. D'ici là, on n'écrit pas de nouveaux tests ; ceux qui existent
+- Tests : **reportés** (décision du 27/11/2026) — on construit d'abord
+  l'appli ; on en reparle à la fin de l'étape 4 (ou 5). D'ici là, on
+  n'écrit pas de nouveaux tests ; ceux qui existent
   restent en place et tournent en CI. À chaque PR, ajouter ses points
   critiques à la liste « À tester plus tard ». Au moment de s'y mettre : pas
   de TDD ; on cible les zones critiques (règles métier, droits d'accès, cycle
