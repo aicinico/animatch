@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { getAccessToken } from '@/lib/auth';
+import { apiFetch } from '@/lib/auth';
 
 // What GET /api/me returns
 type CurrentUser = {
@@ -21,14 +21,7 @@ function HomePage() {
   // Once, when the page appears: ask the API who is logged in
   useEffect(() => {
     async function loadCurrentUser() {
-      const token = getAccessToken();
-      if (token === null) {
-        return;
-      }
-
-      const response = await fetch('/api/me', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await apiFetch('/api/me');
       if (response.ok) {
         setCurrentUser(await response.json());
       }
