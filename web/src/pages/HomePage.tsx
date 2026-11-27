@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { apiFetch } from '@/lib/auth';
+import { Button } from '@/components/ui/button';
+import { apiFetch, logout } from '@/lib/auth';
 
 // What GET /api/me returns
 type CurrentUser = {
@@ -30,16 +31,26 @@ function HomePage() {
     loadCurrentUser();
   }, []);
 
+  async function handleLogout() {
+    await logout();
+    setCurrentUser(null);
+  }
+
   return (
     <main className="p-4">
       <h1>Animatch</h1>
       <p>Adoptez un chat ou un chien près de chez vous.</p>
 
       {currentUser ? (
-        <p className="mt-4">
-          Connecté en tant que {currentUser.email} (
-          {ROLE_LABELS[currentUser.role]})
-        </p>
+        <div className="mt-4 flex items-center gap-4">
+          <p>
+            Connecté en tant que {currentUser.email} (
+            {ROLE_LABELS[currentUser.role]})
+          </p>
+          <Button variant="outline" onClick={handleLogout}>
+            Se déconnecter
+          </Button>
+        </div>
       ) : (
         <p className="mt-4">
           <Link to="/connexion" className="underline">

@@ -40,12 +40,15 @@ security:
             # Exchanges a refresh token for a new JWT + refresh token
             refresh_jwt:
                 check_path: /api/token/refresh
+            # Logging out invalidates the refresh token sent in the body
+            logout:
+                path: api_token_invalidate
 
     # Read from top to bottom: the first matching line wins
     access_control:
         # Open to everyone
         - { path: '^/health$', roles: PUBLIC_ACCESS }
-        - { path: '^/api/(login|token/refresh|register/adopter)$', roles: PUBLIC_ACCESS }
+        - { path: '^/api/(login|token/refresh|token/invalidate|register/adopter)$', roles: PUBLIC_ACCESS }
         # API documentation (Swagger) and the descriptions it links to
         - { path: '^/api/?$', roles: PUBLIC_ACCESS }
         - { path: '^/api/(docs|contexts|errors|validation_errors|\.well-known)(/|\.|$)', roles: PUBLIC_ACCESS }

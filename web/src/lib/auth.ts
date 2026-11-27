@@ -20,6 +20,27 @@ export async function restoreSession() {
   await refreshTokens();
 }
 
+// Forget the tokens, then ask the API to invalidate the refresh token
+export async function logout() {
+  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+  accessToken = null;
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
+
+  if (refreshToken === null) {
+    return;
+  }
+
+  try {
+    await fetch('/api/token/invalidate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    });
+  } catch {
+    // API unreachable: the refresh token will expire on its own
+  }
+}
+
 // fetch() that sends the access token and, if it has expired,
 // gets new tokens and tries once more
 export async function apiFetch(url: string, init: RequestInit = {}) {
