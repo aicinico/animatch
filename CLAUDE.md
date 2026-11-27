@@ -111,7 +111,17 @@ nécessite pas d'accord préalable.
     - Reporté à la PR 1.3 : rafraîchissement automatique quand le jeton
       d'accès expire (aucune page ne l'utilise encore)
     - Reporté : détection de réutilisation (`docs/architecture.md` §14)
-  - [ ] PR 1.3 : rôles et règles d'accès
+  - [x] PR 1.3 : rôles et règles d'accès
+    - [x] API fermée par défaut (`access_control`) : seules la santé, la
+      connexion, le rafraîchissement, la déconnexion, l'inscription
+      adoptant et la documentation restent publiques
+    - [x] `GET /api/me` : e-mail et rôle du compte connecté
+    - [x] Interface : « Connecté en tant que… » sur l'accueil, `apiFetch`
+      (jeton envoyé, rafraîchissement automatique sur 401, un seul
+      rafraîchissement à la fois), bouton « Se déconnecter » qui annule
+      le jeton de rafraîchissement (`POST /api/token/invalidate`)
+    - Reporté aux étapes 2 et 3 : Voters (règles fines par objet, quand
+      refuges et animaux existeront)
   - [ ] PR 1.4 : vérification de l'e-mail
   - [ ] PR 1.5 : mot de passe oublié
 - [ ] Étapes 2 à 10 : voir `docs/architecture.md` §13
@@ -126,3 +136,7 @@ Tenir cette section à jour à la fin de chaque pull request.
 - PR 1.2 : connexion qui renvoie aussi un jeton de rafraîchissement, échange
   contre de nouveaux jetons, ancien jeton refusé (rotation), jeton haché en
   base, session gardée au rechargement, faux jeton supprimé du navigateur
+- PR 1.3 : API fermée par défaut (route protégée sans jeton → 401, routes
+  publiques accessibles), `/api/me` (401 sans jeton ou avec un faux jeton,
+  jamais le mot de passe), un seul rafraîchissement pour deux requêtes
+  simultanées, déconnexion (jeton de rafraîchissement annulé puis refusé)
