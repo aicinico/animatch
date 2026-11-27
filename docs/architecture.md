@@ -138,8 +138,7 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 |---|---|
 | Build et serveur de développement | **Vite** |
 | Navigation entre pages | **React Router** |
-| Appels à l'API, cache, états de chargement | **TanStack Query** |
-| Client d'API typé | **openapi-typescript + openapi-fetch** (types générés depuis la description OpenAPI d'API Platform) |
+| Appels à l'API | **`fetch`**, la fonction intégrée au navigateur (décision du 27/11/2026, plus simple pour débuter). TanStack Query et openapi-fetch, prévus au départ, seront reconsidérés si les besoins grandissent (cache, nombreux écrans). |
 | Formulaires et validation | **React Hook Form** (validation côté serveur uniquement : l'interface affiche les erreurs renvoyées par l'API) |
 | Style | **Tailwind CSS** |
 | Composants (accessibles) | **shadcn/ui** (code des composants copié dans le projet) |
@@ -148,7 +147,9 @@ Chaque modification suit la règle décrite dans le `CLAUDE.md` à la racine du 
 | Tests unitaires | **Vitest + Testing Library** |
 | Qualité | **ESLint + Prettier** |
 
-**Les types partagés** : les types TypeScript de l'API sont générés automatiquement. Si l'API change, la compilation de l'interface et des tests Playwright signale immédiatement ce qui casse.
+**Les types de l'API** : pour l'instant, ils sont écrits à la main dans
+chaque page. Les générer automatiquement depuis l'API (openapi-typescript)
+reste possible plus tard.
 
 ## 9. API (api/)
 
