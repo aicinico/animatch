@@ -33,7 +33,13 @@ security:
             pattern: ^/
             stateless: true
             provider: app_user_provider
+            # Two ways to authenticate here: tell Symfony which one answers
+            # an anonymous request (JWT -> 401)
+            entry_point: jwt
             jwt: ~
+            # Exchanges a refresh token for a new JWT + refresh token
+            refresh_jwt:
+                check_path: /api/token/refresh
 
     # Access rules come in PR 1.3
     access_control: []

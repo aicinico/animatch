@@ -1,0 +1,9 @@
+gesdinet_jwt_refresh_token:
+    refresh_token_class: App\Entity\RefreshToken
+    # Long-lived refresh token (30 days), see docs/architecture.md
+    ttl: 2592000
+    # Rotation: each refresh token works once and is replaced by a new one
+    single_use: true
+    # Only a hash is stored, like passwords: a leaked table is useless
+    hash_tokens:
+        enabled: true

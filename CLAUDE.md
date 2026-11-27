@@ -102,7 +102,15 @@ nécessite pas d'accord préalable.
       openapi-fetch + TanStack Query comme prévu dans l'architecture) ;
       jeton gardé en mémoire
     - Reporté : traduction en français des messages d'erreur de l'API
-  - [ ] PR 1.2 : jeton de rafraîchissement avec rotation
+  - [x] PR 1.2 : jeton de rafraîchissement avec rotation
+    - [x] API : gesdinet/jwt-refresh-token-bundle v2.3 (la v3 exige
+      Symfony 8.1), jeton de 30 jours à usage unique, haché en base,
+      route `POST /api/token/refresh`
+    - [x] Interface : jeton de rafraîchissement dans le `localStorage`,
+      session restaurée au rechargement (dans `main.tsx`, avant React)
+    - Reporté à la PR 1.3 : rafraîchissement automatique quand le jeton
+      d'accès expire (aucune page ne l'utilise encore)
+    - Reporté : détection de réutilisation (`docs/architecture.md` §14)
   - [ ] PR 1.3 : rôles et règles d'accès
   - [ ] PR 1.4 : vérification de l'e-mail
   - [ ] PR 1.5 : mot de passe oublié
@@ -115,3 +123,6 @@ Tenir cette section à jour à la fin de chaque pull request.
 - PR 1.1 : mot de passe haché en base, rôle envoyé par le client ignoré,
   connexion insensible aux majuscules, même message d'erreur pour un e-mail
   inconnu et un mauvais mot de passe, écrans d'inscription et de connexion
+- PR 1.2 : connexion qui renvoie aussi un jeton de rafraîchissement, échange
+  contre de nouveaux jetons, ancien jeton refusé (rotation), jeton haché en
+  base, session gardée au rechargement, faux jeton supprimé du navigateur
